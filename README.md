@@ -3,7 +3,7 @@
 
 *for inquiries: boynetta.inquiries@icloud.com*
 
-*Working title. Everything here is a starting point, not a constraint.*
+*Working title. Everything here is a starting point, not a constraint, except his sexuality and the general vibe*
 
 -----
 
