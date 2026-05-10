@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -8,314 +9,312 @@
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  body {
-    background: #000;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    font-family: 'Cinzel', serif;
-  }
+body {
+background: #000;
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+overflow: hidden;
+font-family: ‘Cinzel’, serif;
+}
 
-  .scene {
-    position: relative;
-    width: 900px;
-    height: 600px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+.scene {
+position: relative;
+width: 900px;
+height: 600px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
 
-  /* Background — dark marble texture via CSS */
-  .bg {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse at 50% 50%, #1a0a00 0%, #000 70%),
-      repeating-linear-gradient(
-        47deg,
-        transparent,
-        transparent 2px,
-        rgba(255,200,50,0.015) 2px,
-        rgba(255,200,50,0.015) 4px
-      );
-  }
+/* Background — dark marble texture via CSS */
+.bg {
+position: absolute;
+inset: 0;
+background:
+radial-gradient(ellipse at 50% 50%, #1a0a00 0%, #000 70%),
+repeating-linear-gradient(
+47deg,
+transparent,
+transparent 2px,
+rgba(255,200,50,0.015) 2px,
+rgba(255,200,50,0.015) 4px
+);
+}
 
-  /* Vignette */
-  .vignette {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.85) 100%);
-    pointer-events: none;
-  }
+/* Vignette */
+.vignette {
+position: absolute;
+inset: 0;
+background: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.85) 100%);
+pointer-events: none;
+}
 
-  /* Decorative corner filigrees */
-  .corner {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    border-color: rgba(180,130,30,0.6);
-    border-style: solid;
-  }
-  .corner-tl { top: 24px; left: 24px; border-width: 2px 0 0 2px; }
-  .corner-tr { top: 24px; right: 24px; border-width: 2px 2px 0 0; }
-  .corner-bl { bottom: 24px; left: 24px; border-width: 0 0 2px 2px; }
-  .corner-br { bottom: 24px; right: 24px; border-width: 0 2px 2px 0; }
+/* Decorative corner filigrees */
+.corner {
+position: absolute;
+width: 80px;
+height: 80px;
+border-color: rgba(180,130,30,0.6);
+border-style: solid;
+}
+.corner-tl { top: 24px; left: 24px; border-width: 2px 0 0 2px; }
+.corner-tr { top: 24px; right: 24px; border-width: 2px 2px 0 0; }
+.corner-bl { bottom: 24px; left: 24px; border-width: 0 0 2px 2px; }
+.corner-br { bottom: 24px; right: 24px; border-width: 0 2px 2px 0; }
 
-  .corner::after {
-    content: '✦';
-    position: absolute;
-    color: rgba(200,150,40,0.5);
-    font-size: 10px;
-  }
-  .corner-tl::after { top: -6px; left: -6px; }
-  .corner-tr::after { top: -6px; right: -6px; }
-  .corner-bl::after { bottom: -6px; left: -6px; }
-  .corner-br::after { bottom: -6px; right: -6px; }
+.corner::after {
+content: ‘✦’;
+position: absolute;
+color: rgba(200,150,40,0.5);
+font-size: 10px;
+}
+.corner-tl::after { top: -6px; left: -6px; }
+.corner-tr::after { top: -6px; right: -6px; }
+.corner-bl::after { bottom: -6px; left: -6px; }
+.corner-br::after { bottom: -6px; right: -6px; }
 
-  .content {
-    position: relative;
-    text-align: center;
-    z-index: 10;
-  }
+.content {
+position: relative;
+text-align: center;
+z-index: 10;
+}
 
-  /* Katakana above */
-  .katakana {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
-    letter-spacing: 0.8em;
-    color: rgba(200,150,40,0.7);
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    display: block;
-  }
+/* Katakana above */
+.katakana {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 13px;
+letter-spacing: 0.8em;
+color: rgba(200,150,40,0.7);
+text-transform: uppercase;
+margin-bottom: 12px;
+display: block;
+}
 
-  /* Thin gold line */
-  .line {
-    width: 320px;
-    height: 1px;
-    margin: 0 auto 16px;
-    background: linear-gradient(90deg, transparent, rgba(200,150,40,0.8), rgba(255,220,80,1), rgba(200,150,40,0.8), transparent);
-    position: relative;
-  }
-  .line::before, .line::after {
-    content: '◆';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    color: rgba(200,150,40,0.9);
-    font-size: 7px;
-  }
-  .line::before { left: 60px; }
-  .line::after { right: 60px; }
+/* Thin gold line */
+.line {
+width: 320px;
+height: 1px;
+margin: 0 auto 16px;
+background: linear-gradient(90deg, transparent, rgba(200,150,40,0.8), rgba(255,220,80,1), rgba(200,150,40,0.8), transparent);
+position: relative;
+}
+.line::before, .line::after {
+content: ‘◆’;
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+color: rgba(200,150,40,0.9);
+font-size: 7px;
+}
+.line::before { left: 60px; }
+.line::after { right: 60px; }
 
-  /* Main title */
-  .title {
-    font-family: 'Cinzel Decorative', serif;
-    font-weight: 900;
-    font-size: 110px;
-    letter-spacing: 0.22em;
-    line-height: 1;
-    position: relative;
-    display: inline-block;
+/* Main title */
+.title {
+font-family: ‘Cinzel Decorative’, serif;
+font-weight: 900;
+font-size: 110px;
+letter-spacing: 0.18em;
+line-height: 1;
+position: relative;
+display: flex;
+align-items: center;
+justify-content: center;
+white-space: nowrap;
+animation: shimmer 4s ease-in-out infinite;
+}
 
-    /* The overdone gold gradient */
-    background: linear-gradient(
-      180deg,
-      #fff8dc 0%,
-      #ffd700 15%,
-      #b8860b 35%,
-      #ffd700 50%,
-      #daa520 65%,
-      #ffd700 80%,
-      #fff8dc 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+.title-letter {
+display: inline-block;
+background: linear-gradient(
+180deg,
+#fff8dc 0%,
+#ffd700 15%,
+#b8860b 35%,
+#ffd700 50%,
+#daa520 65%,
+#ffd700 80%,
+#fff8dc 100%
+);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+filter: drop-shadow(0 0 20px rgba(255,200,0,0.4)) drop-shadow(0 4px 8px rgba(0,0,0,0.8));
+}
 
-    /* The shadow that is too much */
-    filter: drop-shadow(0 0 20px rgba(255,200,0,0.4)) drop-shadow(0 4px 8px rgba(0,0,0,0.8));
+@keyframes shimmer {
+0%, 100% { filter: drop-shadow(0 0 20px rgba(255,200,0,0.4)) drop-shadow(0 4px 8px rgba(0,0,0,0.8)); }
+50% { filter: drop-shadow(0 0 35px rgba(255,220,0,0.6)) drop-shadow(0 4px 8px rgba(0,0,0,0.8)); }
+}
 
-    animation: shimmer 4s ease-in-out infinite;
-  }
+.letter-b {
+position: relative;
+}
 
-  @keyframes shimmer {
-    0%, 100% { filter: drop-shadow(0 0 20px rgba(255,200,0,0.4)) drop-shadow(0 4px 8px rgba(0,0,0,0.8)); }
-    50% { filter: drop-shadow(0 0 35px rgba(255,220,0,0.6)) drop-shadow(0 4px 8px rgba(0,0,0,0.8)); }
-  }
+.blood {
+position: absolute;
+top: -8px;
+left: 0;
+width: 100%;
+height: 100%;
+pointer-events: none;
+z-index: 20;
+}
 
-  /* The B — specifically the B — has blood */
-  .letter-b {
-    position: relative;
-    display: inline-block;
-  }
+.blood-drop {
+position: absolute;
+background: linear-gradient(180deg, #8b0000, #cc0000);
+border-radius: 50% 50% 60% 60%;
+filter: drop-shadow(0 0 3px rgba(139,0,0,0.8));
+}
 
-  .blood {
-    position: absolute;
-    top: -8px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 20;
-  }
+.drop-1 { width: 4px; height: 12px; top: 2px; left: 28%; border-radius: 2px 2px 50% 50%; }
+.drop-2 { width: 3px; height: 8px; top: 5px; left: 42%; border-radius: 2px 2px 50% 50%; }
+.drop-3 { width: 5px; height: 16px; top: 0px; left: 58%; border-radius: 2px 2px 50% 50%; }
+.drop-4 { width: 3px; height: 6px; top: 8px; left: 72%; border-radius: 2px 2px 50% 50%; }
 
-  .blood-drop {
-    position: absolute;
-    background: linear-gradient(180deg, #8b0000, #cc0000);
-    border-radius: 50% 50% 60% 60%;
-    filter: drop-shadow(0 0 3px rgba(139,0,0,0.8));
-  }
+/* The R — something is happening to the R */
+.letter-r {
+position: relative;
+}
+.letter-r::after {
+content: ‘⚜’;
+position: absolute;
+bottom: -14px;
+left: 50%;
+transform: translateX(-50%);
+font-size: 11px;
+background: linear-gradient(180deg, #ffd700, #b8860b);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+background-clip: text;
+opacity: 0.8;
+}
 
-  .drop-1 { width: 4px; height: 12px; top: 2px; left: 28%; border-radius: 2px 2px 50% 50%; }
-  .drop-2 { width: 3px; height: 8px; top: 5px; left: 42%; border-radius: 2px 2px 50% 50%; }
-  .drop-3 { width: 5px; height: 16px; top: 0px; left: 58%; border-radius: 2px 2px 50% 50%; }
-  .drop-4 { width: 3px; height: 6px; top: 8px; left: 72%; border-radius: 2px 2px 50% 50%; }
+/* Bottom line */
+.line-bottom {
+width: 320px;
+height: 1px;
+margin: 20px auto 14px;
+background: linear-gradient(90deg, transparent, rgba(200,150,40,0.8), rgba(255,220,80,1), rgba(200,150,40,0.8), transparent);
+position: relative;
+}
+.line-bottom::before, .line-bottom::after {
+content: ‘◆’;
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+color: rgba(200,150,40,0.9);
+font-size: 7px;
+}
+.line-bottom::before { left: 60px; }
+.line-bottom::after { right: 60px; }
 
-  /* The R — something is happening to the R */
-  .letter-r {
-    position: relative;
-    display: inline-block;
-  }
-  .letter-r::after {
-    content: '⚜';
-    position: absolute;
-    bottom: -14px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 11px;
-    background: linear-gradient(180deg, #ffd700, #b8860b);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    opacity: 0.8;
-  }
+/* Tagline */
+.tagline {
+font-family: ‘Cormorant Garamond’, serif;
+font-style: italic;
+font-size: 14px;
+letter-spacing: 0.35em;
+color: rgba(200,160,60,0.75);
+text-transform: uppercase;
+margin-bottom: 18px;
+}
 
-  /* Bottom line */
-  .line-bottom {
-    width: 320px;
-    height: 1px;
-    margin: 20px auto 14px;
-    background: linear-gradient(90deg, transparent, rgba(200,150,40,0.8), rgba(255,220,80,1), rgba(200,150,40,0.8), transparent);
-    position: relative;
-  }
-  .line-bottom::before, .line-bottom::after {
-    content: '◆';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    color: rgba(200,150,40,0.9);
-    font-size: 7px;
-  }
-  .line-bottom::before { left: 60px; }
-  .line-bottom::after { right: 60px; }
+/* チェーザレ */
+.cesare-jp {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 11px;
+letter-spacing: 0.6em;
+color: rgba(180,130,30,0.5);
+text-transform: uppercase;
+}
 
-  /* Tagline */
-  .tagline {
-    font-family: 'Cormorant Garamond', serif;
-    font-style: italic;
-    font-size: 14px;
-    letter-spacing: 0.35em;
-    color: rgba(200,160,60,0.75);
-    text-transform: uppercase;
-    margin-bottom: 18px;
-  }
+/* Particle glow dots */
+.particles {
+position: absolute;
+inset: 0;
+pointer-events: none;
+overflow: hidden;
+}
 
-  /* チェーザレ */
-  .cesare-jp {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 11px;
-    letter-spacing: 0.6em;
-    color: rgba(180,130,30,0.5);
-    text-transform: uppercase;
-  }
+.particle {
+position: absolute;
+border-radius: 50%;
+background: rgba(255,200,50,0.6);
+animation: float linear infinite;
+}
 
-  /* Particle glow dots */
-  .particles {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-  }
+@keyframes float {
+0% { transform: translateY(0) translateX(0); opacity: 0; }
+10% { opacity: 1; }
+90% { opacity: 0.5; }
+100% { transform: translateY(-400px) translateX(var(–dx)); opacity: 0; }
+}
 
-  .particle {
-    position: absolute;
-    border-radius: 50%;
-    background: rgba(255,200,50,0.6);
-    animation: float linear infinite;
-  }
+/* Ambient red glow at bottom — suggests something dark */
+.red-glow {
+position: absolute;
+bottom: 0;
+left: 50%;
+transform: translateX(-50%);
+width: 400px;
+height: 120px;
+background: radial-gradient(ellipse at center bottom, rgba(100,0,0,0.25) 0%, transparent 70%);
+pointer-events: none;
+}
 
-  @keyframes float {
-    0% { transform: translateY(0) translateX(0); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 0.5; }
-    100% { transform: translateY(-400px) translateX(var(--dx)); opacity: 0; }
-  }
+/* Subtitle — unnecessarily complicated */
+.subtitle-block {
+position: absolute;
+bottom: 50px;
+right: 60px;
+text-align: right;
+}
 
-  /* Ambient red glow at bottom — suggests something dark */
-  .red-glow {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 400px;
-    height: 120px;
-    background: radial-gradient(ellipse at center bottom, rgba(100,0,0,0.25) 0%, transparent 70%);
-    pointer-events: none;
-  }
+.subtitle-jp {
+font-family: ‘Cormorant Garamond’, serif;
+font-size: 10px;
+letter-spacing: 0.4em;
+color: rgba(180,130,30,0.4);
+display: block;
+margin-bottom: 4px;
+}
 
-  /* Subtitle — unnecessarily complicated */
-  .subtitle-block {
-    position: absolute;
-    bottom: 50px;
-    right: 60px;
-    text-align: right;
-  }
+.subtitle-rating {
+font-family: ‘Cinzel’, serif;
+font-size: 9px;
+letter-spacing: 0.3em;
+color: rgba(180,130,30,0.35);
+border: 1px solid rgba(180,130,30,0.25);
+padding: 2px 8px;
+display: inline-block;
+}
 
-  .subtitle-jp {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 10px;
-    letter-spacing: 0.4em;
-    color: rgba(180,130,30,0.4);
-    display: block;
-    margin-bottom: 4px;
-  }
+/* Top left — studio name doing too much */
+.studio {
+position: absolute;
+top: 50px;
+left: 60px;
+text-align: left;
+}
 
-  .subtitle-rating {
-    font-family: 'Cinzel', serif;
-    font-size: 9px;
-    letter-spacing: 0.3em;
-    color: rgba(180,130,30,0.35);
-    border: 1px solid rgba(180,130,30,0.25);
-    padding: 2px 8px;
-    display: inline-block;
-  }
+.studio-name {
+font-family: ‘Cinzel’, serif;
+font-size: 9px;
+letter-spacing: 0.5em;
+color: rgba(180,130,30,0.4);
+display: block;
+}
 
-  /* Top left — studio name doing too much */
-  .studio {
-    position: absolute;
-    top: 50px;
-    left: 60px;
-    text-align: left;
-  }
-
-  .studio-name {
-    font-family: 'Cinzel', serif;
-    font-size: 9px;
-    letter-spacing: 0.5em;
-    color: rgba(180,130,30,0.4);
-    display: block;
-  }
-
-  .studio-line {
-    width: 60px;
-    height: 1px;
-    background: rgba(180,130,30,0.3);
-    margin-top: 4px;
-  }
+.studio-line {
+width: 60px;
+height: 1px;
+background: rgba(180,130,30,0.3);
+margin-top: 4px;
+}
 
 </style>
 </head>
@@ -326,6 +325,7 @@
   <div class="red-glow"></div>
 
   <!-- Particles -->
+
   <div class="particles">
     <div class="particle" style="width:2px;height:2px;left:15%;bottom:0;animation-duration:8s;animation-delay:0s;--dx:20px"></div>
     <div class="particle" style="width:1px;height:1px;left:25%;bottom:0;animation-duration:11s;animation-delay:2s;--dx:-15px"></div>
@@ -337,49 +337,58 @@
   </div>
 
   <!-- Corners -->
+
   <div class="corner corner-tl"></div>
   <div class="corner corner-tr"></div>
   <div class="corner corner-bl"></div>
   <div class="corner corner-br"></div>
 
   <!-- Studio -->
+
   <div class="studio">
     <span class="studio-name">NOTTEMARE STUDIOS</span>
     <div class="studio-line"></div>
   </div>
 
   <!-- Bottom right info -->
+
   <div class="subtitle-block">
     <span class="subtitle-jp">カリブロ</span>
     <span class="subtitle-rating">STYLISH ACTION</span>
   </div>
 
   <!-- Main content -->
+
   <div class="content">
     <span class="katakana">カ リ ブ ロ</span>
 
-    <div class="line"></div>
+```
+<div class="line"></div>
 
-    <div class="title">
-      C A L I
-      <span class="letter-b">
-        B
-        <div class="blood">
-          <div class="blood-drop drop-1"></div>
-          <div class="blood-drop drop-2"></div>
-          <div class="blood-drop drop-3"></div>
-          <div class="blood-drop drop-4"></div>
-        </div>
-      </span>
-      <span class="letter-r">R</span>
-      O
+<div class="title">
+  <span class="title-letter">C</span>
+  <span class="title-letter">A</span>
+  <span class="title-letter">L</span>
+  <span class="title-letter">I</span>
+  <span class="title-letter letter-b">B
+    <div class="blood">
+      <div class="blood-drop drop-1"></div>
+      <div class="blood-drop drop-2"></div>
+      <div class="blood-drop drop-3"></div>
+      <div class="blood-drop drop-4"></div>
     </div>
+  </span>
+  <span class="title-letter letter-r">R</span>
+  <span class="title-letter">O</span>
+</div>
 
-    <div class="line-bottom"></div>
+<div class="line-bottom"></div>
 
-    <div class="tagline">Style is not optional</div>
+<div class="tagline">Style is not optional</div>
 
-    <div class="cesare-jp">チェーザレ &nbsp;·&nbsp; ヴェラ &nbsp;·&nbsp; モンレアーレ</div>
+<div class="cesare-jp">チェーザレ &nbsp;·&nbsp; ヴェラ &nbsp;·&nbsp; モンレアーレ</div>
+```
+
   </div>
 
   <div class="vignette"></div>
